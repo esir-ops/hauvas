@@ -73,7 +73,7 @@
 
 1. Clone the repository:
     ```bash
-    https://github.com/brown-cookies/hauvas.git
+    git clone https://github.com/brown-cookies/hauvas.git
     cd hauvas
     ```
 
