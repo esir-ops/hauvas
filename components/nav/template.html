@@ -38,12 +38,11 @@
               <div class="user-img d-flex align-items-center">
                 <div class="avatar avatar-md">
                   {% if user.profile.gender == 'M' %}
-                  <img src="{% static '/compiled/jpg/2.jpg' %}" />
+                  <img src="{% static '/jpg/2.jpg' %}" />
                   {% elif user.profile.gender == 'F' %}
-                  <img src="{% static '/compiled/jpg/5.jpg' %}" />
+                  <img src="{% static '/jpg/5.jpg' %}" />
                   {% else %}
-                  <img src="{% static '/compiled/jpg/4.jpg' %}" />
-
+                  <img src="{% static '/jpg/4.jpg' %}" />
                   {% endif %}
                 </div>
               </div>
