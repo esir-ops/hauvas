@@ -1,0 +1,23 @@
+{
+  "cSpell.words": [
+    "browsable",
+    "DATANALYSIS",
+    "grappelli",
+    "todos",
+    "viewsets"
+  ],
+  "tabnine.debounceMilliseconds": 1250,
+  "editor.tabSize": 4,
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.quickSuggestionsDelay": 3000,
+  "editor.suggest.showWords": false,
+  "editor.suggest.showConstants": false,
+  "editor.suggest.showFiles": false,
+  "editor.suggest.showColors": false,
+  "editor.suggest.showUnits": false,
+  "editor.suggest.showFolders": false
+}

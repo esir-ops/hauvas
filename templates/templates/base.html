@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Title Here! {% endblock %} | Canvas++</title>
+
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/bootstrap-dark.min.css' %}">
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/auth.css' %}">
+    <link rel="stylesheet"
+    crossorigin 
+    href="{% static '/extensions/toastify-js/src/toastify.css' %}"
+    />
+</head>
+
+<body>
+    <script src="{% static '/compiled/js/initTheme.js' %}"></script>
+
+    <div id="auth">
+        
+        <div class="row h-100">
+        <div class="col-lg-5 col-12">
+            <div id="auth-left">
+                <div class="auth-logo">
+                {% block heading %}<h1>Canvas++</h1>{% endblock heading %}
+                </div>
+                <h1 class="auth-title">Log in.</h1>
+                <p class="auth-subtitle mb-5">Continue with our LMS Program built with Django.</p>
+
+                {% block form_content %}{% endblock form_content %}
+                {% block forgot_password %}{% endblock forgot_password %}
+        </div>
+    </div>
+        <div class="col-lg-7 d-none d-lg-block">
+            <div id="auth-right"></div>
+        </div>
+    </div>
+    {% if messages %}
+    <ul class="messages d-none">
+    {% for message in messages %}
+        <li data-message="{{ message }}" data-level={{ message.level }}>
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <script src="{% static '/compiled/js/dark.js' %}" defer></script>
+
+    <script
+      src="{% static '/extensions/perfect-scrollbar/perfect-scrollbar.min.js' %}"
+      defer
+    ></script>
+    <script src="{% static '/compiled/js/app.js' %}" defer></script>
+    <script src="{% static '/extensions/jquery/jquery.min.js' defer %}"></script>
+    <script src="{% static '/extensions/toastify-js/src/toastify.js' defer %}"></script>
+    <script src="{% static '/compiled/js/display-toastify.js' defer %}"></script>
+
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% extends "base/base.html" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Change Password</h5>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'security' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group my-2">
+              <label for="id_old_password" class="form-label">Current Password</label>
+              {{ form.old_password }}
+              <div class="invalid-feedback" id="current-password-error">
+                {% if form.errors %}
+                  {% if form.old_password.errors %}
+                    {% for error in form.old_password.errors %}
+                      <p data-current-password-error="true">{{ error }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
+              </div>          
+            </div>
+            <div class="form-group my-2">
+              <label for="id_new_password1" class="form-label">New Password</label>
+              {{ form.new_password1 }}
+              <div class="invalid-feedback">
+                {% if form.errors %}
+                  {% if form.new_password2.errors %}
+                    {% for error in form.new_password2.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group my-2">
+              <label for="id_new_password2" class="form-label">Confirm New Password</label>
+              {{ form.new_password2 }}
+              <div class="invalid-feedback" id="new-password-two-error">
+                {% if form.errors %}
+                  {% if form.new_password2.errors %}
+                    {% for error in form.new_password2.errors %}
+                      <p data-new-password-two-error="true">{{ error }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
+              </div>  
+            </div>
+
+            <div class="form-group my-2 d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+  $(function() {
+    let current_password = $("#current-password-error p");
+    let new_password2 = $("#new-password-two-error p");
+
+    if (current_password.data("current-password-error")) {
+      $("#id_old_password").addClass("is-invalid");
+    }
+
+    if (new_password2.data("new-password-two-error")) {
+      $("#id_new_password1").addClass("is-invalid");
+      $("#id_new_password2").addClass("is-invalid");
+    }
+  });
+</script>
+{% endblock extra_js %}

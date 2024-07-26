@@ -1,0 +1,115 @@
+{% comment %} {% endcomment %}
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'compiled/png/2.png' %}">
+
+    <title>{% block title %} Title Here! {% endblock %} | Canvas++</title>
+
+    <!-- Main styling starts here -->
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/application-email.css' %}" /> 
+    
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/bootstrap.min.css' %}"/>
+    
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/bootstrap-dark.min.css' %}"/>
+
+    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/iconly.css' %}"/>
+
+    <link rel="stylesheet" crossorigin href="{% static '/extensions/@fortawesome/fontawesome-free/css/all.min.css' %}"/>
+
+    <link rel="stylesheet" crossorigin href="{% static '/extensions/toastify-js/src/toastify.css' %}"/>
+
+    <link rel="stylesheet" crossorigin href="{% static '/extensions/sweetalert2/sweetalert2.min.css' %}"/>
+
+    <link rel="stylesheet" crossorigin href="{% static '/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css' %}"/>
+
+    <link rel="stylesheet" href="{% static '/compiled/css/table-datatable-jquery.css' %}"/>
+
+
+    {% component_css_dependencies %}
+    {% block extra_css %}{% endblock extra_css %}
+
+    <!-- Main styling ends here -->
+  </head>
+  <body>
+    {% comment %} Checking whether browser preferred dark/light mode starts here {% endcomment %}
+    <script src="{% static '/compiled/js/initTheme.js' %}"></script>
+    {% comment %} Checking whether browser preferred dark/light mode ends here {% endcomment %}
+
+    {% comment %} Modal container starts here {% endcomment %}
+    {% block modal %}{% endblock modal %}
+    {% comment %} Modal container ends here {% endcomment %}
+
+    {% comment %} Main page starts here {% endcomment %}
+    <div id="app">
+
+      {% block nav %}
+      {% component "nav" %}{% endcomponent %}
+      {% endblock nav %}
+      {% block sidebar %}
+      {% component "sidebar" %}{% endcomponent %}
+      {% endblock sidebar %}
+
+      <div id="main">
+        {% block content %}
+          <h1>Content Here!</h1>
+        {% endblock content %} 
+      </div>
+    </div>
+    {% comment %} <Main page ends here {% endcomment %}
+
+    {% comment %} Messages display starts here (hidden by default for toastify to use) {% endcomment %}
+    {% if messages %}
+      <ul class="messages d-none">
+      {% for message in messages %}
+          <li data-message="{{ message }}" data-level={{ message.level }}>
+          </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% comment %} Messages display ends here {% endcomment %}
+
+    {% comment %} <Main Sources {% endcomment %}
+
+    {% comment %} Handling dark mode toggle {% endcomment %}
+    <script src="{% static '/compiled/js/dark.js' %}" defer></script>
+    {% comment %} Handling dark mode toggle {% endcomment %}
+
+    {% comment %} App's script starts here {% endcomment %}
+    <script src="{% static '/compiled/js/app.js' %}" defer></script>
+    {% comment %} App's script starts here {% endcomment %}
+
+    {% comment %} Custom scrollbar starts here {% endcomment %}
+    <script
+      src="{% static '/extensions/perfect-scrollbar/perfect-scrollbar.min.js' %}"
+      defer
+    ></script>
+    {% comment %} Custom scrollbar starts here {% endcomment %}
+
+    {% comment %} jQuery starts here {% endcomment %}
+    <script src="{% static '/extensions/jquery/jquery.min.js' defer %}"></script>
+    {% comment %} jQuery ends here {% endcomment %}
+
+    {% comment %} Toastify.js starts here {% endcomment %}
+    <script src="{% static '/extensions/toastify-js/src/toastify.js' defer %}"></script>
+    <script src="{% static '/compiled/js/display-toastify.js' defer %}"></script>
+    {% comment %} Toastify.js ends here {% endcomment %}
+
+    {% comment %} SweetAlert starts here {% endcomment %}
+    <script src="{% static '/extensions/sweetalert2/sweetalert2.min.js' %}"></script>
+    {% comment %} SweetAlert ends here {% endcomment %}
+
+    {% comment %} Jquery DataTables with BS5 starts here {% endcomment %}
+    <script src="{% static '/extensions/datatables.net/js/jquery.dataTables.min.js' %}" defer></script>
+    <script src="{% static '/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js' %}" defer></script>
+    {% comment %} Jquery DataTables with BS5 ends here {% endcomment %}
+
+    {% component_js_dependencies %}
+    {% block extra_js %}{% endblock extra_js %}
+  </body>
+</html>
