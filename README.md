@@ -73,8 +73,8 @@
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/username/hauvas-lms.git
-    cd hauvas-lms
+    https://github.com/brown-cookies/hauvas.git
+    cd hauvas
     ```
 
 2. Install dependencies:
