@@ -9,7 +9,7 @@
 
 ### Course Management
 - **Course Creation**: Easily create and manage courses, including modules, lessons, and quizzes.
-- **Content Delivery**: Support for various types of content, including text, video, and interactive elements.
+- **Content Delivery**: Support for various types of content, including text and file uploads.
 - **To-Do App Integration**: Allows students and instructors to manage tasks and deadlines efficiently.
 - **Event Listing Integration**: A centralized calendar for listing and tracking academic events, deadlines, and activities.
 - **Student Grading**: Comprehensive tools for grading assignments, quizzes, and exams, with integrated gradebook functionality.
