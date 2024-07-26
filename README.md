@@ -1,1 +1,1 @@
-# Django-Canvas++
+# HAUvas++
