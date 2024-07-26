@@ -1,5 +1,3 @@
-# Hauvas LMS
-
 ## Overview
 
 **Hauvas++** is a comprehensive Learning Management System (LMS) built using Django, a high-level Python web framework. Designed to facilitate online education, Hauvas++ offers a robust platform for course management, student tracking, and educational content delivery. In addition to its core LMS features, Hauvas also supports a to-do app, event listing, and student grading functionalities, making it a versatile tool for both educators and learners.
@@ -59,6 +57,9 @@
 - **SQLite**: For lightweight, embedded database solutions during development. (First approach)
 - **PostgreSQL**: A powerful, open-source object-relational database system. (Planning to switch later)
 
+### Caching
+- **Redis**: A powerful, open-source for caching web pages, and datas for increased performance
+
 ### Hosting and Deployment (Finals na namin decide ano gagamitin)
 - **Azure**: App service
 - **Upstash Redis**: Redis cache
@@ -76,19 +77,32 @@
     git clone https://github.com/brown-cookies/hauvas.git
     cd hauvas
     ```
-
-2. Install dependencies:
+2. Create a virtual environment:
+    ```bash
+    python -m venv venv
+    ```
+3. Activate virtual environment:
+        Windows:
+       ```bash
+        venv/Scripts/activate
+        ```
+       MacOS and Linux:
+       ```bash
+        . venv/bin/activate
+        ```
+   
+4. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
 
-3. Apply migrations:
+5. Apply migrations:
     ```bash
     python manage.py migrate
     ```
 
-4. Run the development server:
+6. Run the development server:
     ```bash
     python manage.py runserver
     ```
-5. Visit [](127.0.0.1:8000)
+7. Visit [127.0.0.1:8000](127.0.0.1:8000)
