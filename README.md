@@ -1,4 +1,25 @@
-## Overview
+# Hauvas++ LMS
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+  - [Course Management](#course-management)
+  - [User Management](#user-management)
+  - [Assessment and Grading](#assessment-and-grading)
+  - [Communication Tools](#communication-tools)
+- [Technology Stack](#technology-stack)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [Database](#database)
+  - [Caching](#caching)
+  - [Hosting and Deployment](#hosting-and-deployment)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+
+
+## [Overview](#overview)
 
 **Hauvas++** is a comprehensive Learning Management System (LMS) built using Django, a high-level Python web framework. Designed to facilitate online education, Hauvas++ offers a robust platform for course management, student tracking, and educational content delivery. In addition to its core LMS features, Hauvas also supports a to-do app, event listing, and student grading functionalities, making it a versatile tool for both educators and learners.
 
@@ -40,6 +61,9 @@
 - **HTML/CSS**: For structuring and styling the web pages.
 - **JavaScript**: For creating dynamic and interactive user experiences.
 - **[Bootstrap](https://getbootstrap.com/)**: For responsive design and pre-built UI components.
+- **[Mazer](https://github.com/zuramai/mazer)** For easy integration of Dashboard that can help develop faster. Made with Bootstrap 5.
+    - **_NOTE:_** This requires in-depth knowledge on HTML/CSS/BOOTSTRAP for Django implementation
+    - **_NOTE:_** This requires Reverse Engineering Techniques
 - **[jQuery](https://jquery.com/)**: For simplifying HTML document traversal and manipulation, event handling, and animations.
 - **[PerfectScrollbar](https://github.com/mdbootstrap/perfect-scrollbar)**: For custom scrollbar styling and smooth scrolling.
 - **[Quill](https://quilljs.com/)**: A rich text editor for creating and editing content.
@@ -50,7 +74,6 @@
 - **[FilePond](https://pqina.nl/filepond/)**: For elegant and customizable file upload components.
 - **[Bootstrap Icons](https://icons.getbootstrap.com/)**: For a wide range of icons integrated with Bootstrap.
 - **[FontAwesome](https://fontawesome.com/)**: For scalable vector icons and social logos.
-- **[React.js](https://reactjs.org/)** (Optional): For building a highly responsive user interface.
 
 
 ### Database
