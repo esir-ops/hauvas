@@ -22,7 +22,7 @@
         <ul class="navbar-nav ms-auto mb-lg-0"></ul>
         <div class="dropdown">
           <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="user-menu d-flex">
+            <div class="user-menu d-flex align-items-center">
               <div class="user-name text-end me-3">
                 <h6 class="mb-0 text-gray-600">
                   {{user.profile.first_name}} {{user.profile.last_name}}
@@ -35,15 +35,11 @@
                   {% endif %}
                 </p>
               </div>
-              <div class="user-img d-flex align-items-center">
-                <div class="avatar avatar-md">
-                  {% if user.profile.gender == 'M' %}
-                  <img src="{% static '/jpg/2.jpg' %}" />
-                  {% elif user.profile.gender == 'F' %}
-                  <img src="{% static '/jpg/5.jpg' %}" />
-                  {% else %}
-                  <img src="{% static '/jpg/4.jpg' %}" />
-                  {% endif %}
+              <div class="d-flex align-items-center justify-content-center">
+                <div class="avatar avatar-lg bg-warning">
+                  <span class="avatar-content">
+                    {{ user.profile.first_name|make_list|first }}{{ user.profile.last_name|make_list|first }}
+                  </span>
                 </div>
               </div>
             </div>
