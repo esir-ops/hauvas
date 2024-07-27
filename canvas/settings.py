@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "announcement",
     "grade",
     "inbox",
-    "schedule",
     "todo",
     "event",
     "api",

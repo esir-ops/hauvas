@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Title Here! {% endblock %} | Canvas++</title>
 
-    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/bootstrap-dark.min.css' %}">
-    <link rel="stylesheet" crossorigin href="{% static '/compiled/css/auth.css' %}">
+    <link rel="stylesheet" crossorigin href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" crossorigin href="{% static '/css/bootstrap-dark.min.css' %}">
+    <link rel="stylesheet" crossorigin href="{% static '/css/auth.css' %}">
     <link rel="stylesheet"
     crossorigin 
-    href="{% static '/extensions/toastify-js/src/toastify.css' %}"
+    href="{% static '/css/toastify.css' %}"
     />
 </head>
 
 <body>
-    <script src="{% static '/compiled/js/initTheme.js' %}"></script>
+    <script src="{% static '/js/initTheme.js' %}"></script>
 
     <div id="auth">
         
@@ -39,23 +39,19 @@
         </div>
     </div>
     {% if messages %}
-    <ul class="messages d-none">
-    {% for message in messages %}
-        <li data-message="{{ message }}" data-level={{ message.level }}>
-        </li>
-    {% endfor %}
-    </ul>
+        <ul class="messages d-none">
+        {% for message in messages %}
+            <li data-message="{{ message }}" data-level={{ message.level }}>
+            </li>
+        {% endfor %}
+        </ul>
     {% endif %}
-    <script src="{% static '/compiled/js/dark.js' %}" defer></script>
-
-    <script
-      src="{% static '/extensions/perfect-scrollbar/perfect-scrollbar.min.js' %}"
-      defer
-    ></script>
-    <script src="{% static '/compiled/js/app.js' %}" defer></script>
-    <script src="{% static '/extensions/jquery/jquery.min.js' defer %}"></script>
-    <script src="{% static '/extensions/toastify-js/src/toastify.js' defer %}"></script>
-    <script src="{% static '/compiled/js/display-toastify.js' defer %}"></script>
+    <script src="{% static '/js/dark.js' %}" defer></script>
+    <script src="{% static '/js/perfect-scrollbar.min.js' %}" defer></script>
+    <script src="{% static '/js/app.js' %}" defer></script>
+    <script src="{% static '/js/jquery.min.js' defer %}"></script>
+    <script src="{% static '/js/toastify.js' defer %}"></script>
+    <script src="{% static '/js/display-toastify.js' defer %}"></script>
 
     {% block extra_js %}{% endblock extra_js %}
 </body>

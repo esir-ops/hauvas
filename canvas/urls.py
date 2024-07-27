@@ -41,7 +41,6 @@ urlpatterns = [
     path("grades/", include("grade.urls")),
     path("inbox/", include("inbox.urls")),
     path("event/", include("event.urls")),
-    path("schedules/", include("schedule.urls")),
     path("todo/", include("todo.urls")),
     path("api/", include("api.urls")),
 ]
