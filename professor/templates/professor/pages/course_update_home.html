@@ -30,6 +30,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form.about }}
+                    <div id="editor"></div>
                     <br />
                     <button class="btn btn-primary" type="submit">Save Changes</button>
                 </form>
@@ -41,3 +42,21 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+  let about_textarea = $("#id_about");
+
+  let quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+
+  console.log(quill)
+
+  quill.on('text-change', (delta, oldDelta, source) => {
+    console.log(quill.getContents())
+  });
+
+  about_textarea.val(about_textarea.attr("value"));
+</script>
+{% endblock extra_js %}
