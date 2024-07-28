@@ -7,36 +7,32 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2">
-            <div class="d-block d-lg-none">
-                <div class="position-relative w-100">
-                    <button class="position-relative end-0 btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sub-menu-collapse" aria-expanded="false" aria-controls="sub-menu-collapse">
-                        Open Navigation
-                    </button>
-                </div>
-                <div class="collapse" id="sub-menu-collapse">
-                    <div class="list-group list-group-flush">
-                        {% component "professor_sub_list" %}{% endcomponent %}
-                    </div>
-                </div>
-            </div>
-            <div class="list-group list-group-flush d-none d-lg-block">
-                {% component "professor_sub_list" %}{% endcomponent %}
-            </div>
-        </div>
-        <div class="col-lg-10">
+        <div class="col-12">
         {% comment %} Content Here {% endcomment %}
         <div class="row">
           <div class="col-xs-1-12">
             <div class="card">
               <div class="card-body">
-                <h3 class="card-title">{{ object.title }} | {{ object.codename }} Course</h3>
-                <p class="card-text">{{ object.semester.term }} Semester {{ object.semester.start_year }}-{{ object.semester.end_year }}</p>
+                <h3 class="card-title">Updating {{ object.title }} | {{ object.codename }} 'About the Course'</h3>
 
                 <br />
-                <h3 class="text-bg-primary px-2 py-1 rounded-1">About this Course</h3>
-                <br />
-                <p class="text-justify lh-base">{{ object.about }}</p>
+
+
+                {% if form_success %}
+                <div class="alert alert-success alert-dismissible show fade">
+                    <span class="fs-5"><i class="bi bi-check-circle"></i> Success Updating About the Course Content!<span>
+                    <a href="{% url 'professor:course' pk=object.id %}">Go back?</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.about }}
+                    <br />
+                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                </form>
               </div>
             </div>
           </div>
