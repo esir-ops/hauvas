@@ -5,46 +5,126 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<section class="section">
+<section class="container-fluid">
   <div class="row">
-    <div class="col-12 col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-center align-items-center flex-column">
-            <div class="avatar avatar-2xl">
-              <img src="{% static '/jpg/2.jpg' %}" alt="Avatar" />
+    <div class="col-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        {% if user.profile.is_student %}
+                            Basic Student
+                        {% elif user.profile.is_professor %}
+                            Basic Professor
+                        {% else %}
+                            Basic Anonymous
+                        {% endif %}
+                        Profile Information
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="d-flex justify-content-center align-items-center flex-column">
+                                <div class="avatar avatar-2xl bg-warning me-3">
+                                    <span class="avatar-content">
+                                        {{ user.profile.first_name|make_list|first }}{{ user.profile.last_name|make_list|first }}
+                                    </span>
+                                </div>
+                
+                                <h5 class="mt-3">{{ user.profile.first_name }} {{ user.profile.last_name }}</h5>
+                                <p class="text-small">
+                                {{ user.profile.bio }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pl-5 row col-12 col-md-8">
+                            <div class="col-6 col-md-4">
+                                <p class="fs-5 fw-medium">Full name</p>
+                            </div>
+                            <div class="col-6 col-md-8">
+                                <p class="fs-5 fst-italic">{{ user.profile.first_name }} {{ user.profile.middle_name }} {{ user.profile.last_name }}</p>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <p class="fs-5 fw-medium">Email</p>
+                            </div>
+                            <div class="col-6 col-md-8">
+                                <p class="fs-5 fst-italic">{{ user.profile.email }}</p>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <p class="fs-5 fw-medium">Gender</p>
+                            </div>
+                            <div class="col-6 col-md-8">
+                                <p class="fs-5 fst-italic">
+                                    {% if user.profile.gender == "M" %}
+                                    Male
+                                    {% elif user.profile.gender == "F" %}
+                                    Female
+                                    {% else %}
+                                    Non-Binary
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <p  class="fs-5 fw-medium">Date of Birth</p>
+                            </div>
+                            <div class="col-6 col-md-8">
+                                <p class="fs-5 fst-italic">{{ user.profile.date_of_birth }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <h3 class="mt-3">{{ user.profile.first_name }} {{ user.profile.last_name }}</h3>
-            <p class="text-small">
-              {{ user.profile.bio }}
-            </p>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-8">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            {% if user.profile.is_student %}
-              Student Profile Information
-            {% elif user.profile.is_professor %}
-              Professor Profile Information
-            {% else %}
-              Unknown Profile Information
-            {% endif %}
-          </h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-  
     </div>
   </div>
   <div class="row">
     <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">
+                  Class Schedule
+              </h4>
+              {% comment %} TODO: Add variable for semester {% endcomment %}
+              <p class="card-text">Your Class Schedule for: 1st Term 2024-2025</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>CLASS CODE</th>
+                            <th>BLOCK</th>
+                            <th>SUBJECT</th>
+                            <th>TIME</th>
+                            <th>DAYS</th>
+                            <th>ROOM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold-500">4711</td>
+                            <td>CPE-202</td>
+                            <td class="text-bold-500">Engineering Economics</td>
+                            <td>7:00AM - 10:00AM</td>
+                            <td>MTH</td>
+                            <td>SH-202</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
       <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">
+                Update your Information
+            </h4>
+        </div>
         <div class="card-body">
           <form action="{% url 'profile' %}" method="POST">
             {% csrf_token %}
