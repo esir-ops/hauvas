@@ -27,7 +27,7 @@
                 {% endif %}
 
 
-                <form method="POST">
+                <form method="POST" action="{% url 'professor:course-update-about' pk=object.id %}">
                     {% csrf_token %}
                     {{ form.about }}
                     <div id="editor"></div>

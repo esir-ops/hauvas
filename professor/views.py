@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.util.get_courses import get_professor_courses
 from .models import Course
-from .forms import UpdateCourseAboutForm
+from .forms import UpdateCourseAboutForm, UpdateCourseSyllabusForm
 
 
 page_link = "course"
@@ -144,6 +144,48 @@ class CourseSyllabusView(CourseView):
 
     def post(self, request, *args, **kwargs):
         pass
+
+
+class CourseSyllabusUpdateView(CourseView):
+    template_name = "professor/pages/course_update_syllabus.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context["sub_link"] = "home"
+        return context
+
+    def get(self, request, **kwargs):
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
+
+        form = UpdateCourseSyllabusForm()
+
+        context = self.get_context_data()
+        context["form"] = form
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
+
+        form = UpdateCourseSyllabusForm(data=request.POST)
+        context = self.get_context_data()
+        context["form"] = form
+
+        if form.is_valid():
+            self.object.syllabus = form.cleaned_data.get("syllabus")
+
+            self.object.save()
+
+            context["form_success"] = True
+
+            messages.success(request, "Content Updated!")
+            return render(request, self.template_name, context)
+        else:
+            messages.error(request, "Invalid Content!")
+            return render(request, self.template_name, context)
 
 
 class CourseModuleView(CourseView):
