@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.urls import reverse
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.util.get_courses import get_professor_courses
