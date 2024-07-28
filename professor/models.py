@@ -36,6 +36,9 @@ class Course(models.Model):
     professor = models.ForeignKey(
         Professor, on_delete=models.CASCADE, related_name="courses"
     )
+    block = models.ForeignKey(
+        "main.Block", on_delete=models.CASCADE, related_name="courses"
+    )
     department = models.ForeignKey(
         "main.Department",
         on_delete=models.CASCADE,

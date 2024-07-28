@@ -14,6 +14,9 @@ class Student(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="student"
     )
+    block = models.ForeignKey(
+        "main.Block", on_delete=models.CASCADE, related_name="students"
+    )
     department = models.ForeignKey(
         "main.Department",
         on_delete=models.CASCADE,

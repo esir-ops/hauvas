@@ -51,3 +51,12 @@ class Semester(models.Model):
 
     def __str__(self):
         return f"{self.term} {self.start_year}-{self.end_year}"
+
+
+class Block(models.Model):
+    name = models.CharField(max_length=254)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name}".upper()
