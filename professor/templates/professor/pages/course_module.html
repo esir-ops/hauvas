@@ -26,15 +26,64 @@
         </div>
         <div class="col-lg-10">
         {% comment %} Content Here {% endcomment %}
-        <div class="row">
-          <div class="col-xs-1-12">
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">Modules</h3>
-              </div>
+            <div class="row">
+                <div class="col-xs-1-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <div class="hstack gap-3 d-flex justify-content-between">
+                                    Modules
+                                    <a href="{% url 'professor:course-update-about' pk=object.id %}" class="btn btn-success">
+                                        <i class="fa fa-plus"></i> Add new module/s
+                                    </a>
+                                </div>
+                            </h3>
+                            <p class="card-text">Manage your modules here!</p>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="accordion" id="accordion-num">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                                Week 01
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                            <div class="list-group">
+                                                <div class="list-group-item list-group-item-action">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <i class="fa fa-lg fa-book me-2"></i>
+                                                        <div class="d-flex w-100 align-items-center justify-content-between">
+                                                            <h5 class="mt-2">
+                                                                <a href="#">Lesson 01: Differentials</a>
+                                                            </h5>
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <a href="{% url 'professor:course-update-about' pk=object.id %}" class="d-block btn btn-light-primary">
+                                                                    <i class="fa fa-eye-slash"></i>
+                                                                </a>
+                                                                <a href="{% url 'professor:course-update-about' pk=object.id %}" class="d-block btn btn-light-primary">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </a>
+                                                                <a href="{% url 'professor:course-update-about' pk=object.id %}" class="d-block btn btn-primary">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                                <button class="d-block btn btn-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
         </div>
     </div>
 </div>
