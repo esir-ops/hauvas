@@ -98,7 +98,7 @@
           <ul class="submenu">
             {% for course in courses %}
             <li class="submenu-item">
-              <a href="{% url 'professor:dashboard' %}{{ course.course_id }}/course/" class="submenu-link">{{ course.title }}</a>
+              <a href="{% url 'professor:course' pk=course.course_id  %}" class="submenu-link">{{ course.title }}</a>
             </li>
           {% endfor %} 
           </ul>
