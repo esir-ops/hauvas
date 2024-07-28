@@ -6,14 +6,10 @@ from common.util.get_courses import get_professor_courses
 from .models import Course
 
 
-page_title = "Courses"
 page_link = "course"
 
 
-# Create your views here.
-class ProfessorDashboardView(LoginRequiredMixin, TemplateView):
-    template_name = "professor/pages/index.html"
-
+class ProfessorView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -23,147 +19,157 @@ class ProfessorDashboardView(LoginRequiredMixin, TemplateView):
 
         context["title"] = "Dashboard"
         context["link"] = "dashboard"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
         context["courses"] = courses
         return context
+
+
+class CourseView(LoginRequiredMixin, DetailView):
+    model = Course
+
+    def get_object(self, pk):
+        return self.model.objects.get(pk=pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        courses = get_professor_courses(user)
+
+        context["title"] = self.object.title
+        context["link"] = page_link
+        context["courses"] = courses
+        return context
+
+
+# Create your views here.
+class ProfessorDashboardView(ProfessorView):
+    template_name = "professor/pages/index.html"
 
     def get(self, request):
         return render(request, self.template_name, self.get_context_data())
 
 
-class ProfessorCourseView(LoginRequiredMixin, DetailView):
-    model = Course
+class CourseHomeView(CourseView):
     template_name = "professor/pages/course.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.request.user
-
-        courses = get_professor_courses(user)
-
-        context["title"] = page_title
-        context["link"] = page_link
         context["sub_link"] = "home"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
-        context["courses"] = courses
         return context
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
         return render(request, self.template_name, self.get_context_data())
 
+    def post(self, request, *args, **kwargs):
+        pass
 
-class ProfessorCourseAnnouncementView(LoginRequiredMixin, DetailView):
-    model = Course
+
+class CourseHomeUpdateView(CourseView):
+    template_name = "professor/pages/course_update_home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["sub_link"] = "home"
+        return context
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
+        return render(request, self.template_name, self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class CourseAnnouncementView(CourseView):
     template_name = "professor/pages/course_announcement.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.request.user
-
-        courses = get_professor_courses(user)
-
-        context["title"] = page_title
-        context["link"] = page_link
         context["sub_link"] = "announcement"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
-        context["courses"] = courses
         return context
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
         return render(request, self.template_name, self.get_context_data())
 
+    def post(self, request, *args, **kwargs):
+        pass
 
-class ProfessorCourseSyllabusView(LoginRequiredMixin, DetailView):
-    model = Course
+
+class CourseSyllabusView(CourseView):
     template_name = "professor/pages/course_syllabus.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.request.user
-
-        courses = get_professor_courses(user)
-
-        context["title"] = page_title
-        context["link"] = page_link
         context["sub_link"] = "syllabus"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
-        context["courses"] = courses
         return context
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
         return render(request, self.template_name, self.get_context_data())
 
+    def post(self, request, *args, **kwargs):
+        pass
 
-class ProfessorCourseModuleView(LoginRequiredMixin, DetailView):
-    model = Course
+
+class CourseModuleView(CourseView):
     template_name = "professor/pages/course_module.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.request.user
-
-        courses = get_professor_courses(user)
-
-        context["title"] = page_title
-        context["link"] = page_link
         context["sub_link"] = "module"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
-        context["courses"] = courses
         return context
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
         return render(request, self.template_name, self.get_context_data())
 
+    def post(self, request, *args, **kwargs):
+        pass
 
-class ProfessorCourseAssignmentView(LoginRequiredMixin, DetailView):
-    model = Course
+
+class CourseAssignmentView(CourseView):
     template_name = "professor/pages/course_assignment.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.request.user
-
-        courses = get_professor_courses(user)
-
-        context["title"] = page_title
-        context["link"] = page_link
         context["sub_link"] = "assignment"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
-        context["courses"] = courses
         return context
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
         return render(request, self.template_name, self.get_context_data())
 
+    def post(self, request, *args, **kwargs):
+        pass
 
-class ProfessorCourseAboutView(LoginRequiredMixin, DetailView):
-    model = Course
+
+class CourseAboutView(CourseView):
     template_name = "professor/pages/course_about.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.request.user
-
-        courses = get_professor_courses(user)
-
-        context["title"] = page_title
-        context["link"] = page_link
         context["sub_link"] = "about"
-        # TODO: Create a fetch function for getting the enrolled courses of each student
-        context["courses"] = courses
         return context
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
         return render(request, self.template_name, self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        pass
