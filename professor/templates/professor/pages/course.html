@@ -41,7 +41,11 @@
                 <br />
                 <h3 class="text-bg-primary px-2 py-1 rounded-1">About this Course</h3>
                 <br />
-                <p class="text-justify lh-base">{{ object.about }}</p>
+                <p class="text-justify lh-base">
+                    {% autoescape off %}
+                        {{ object.about }}
+                    {% endautoescape %}
+                </p>
               </div>
             </div>
           </div>
