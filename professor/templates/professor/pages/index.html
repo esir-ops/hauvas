@@ -4,57 +4,68 @@
 
 {% block title %} {{ title }} {% endblock %} 
 
+{% block extra_css %}
+<style>
+  .course-block {
+    transition-duration: 300ms;
+  }
+
+  .course-block:hover {
+    transform: translate(0, -10px);
+  }
+</style>
+{% endblock extra_css %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row">
     </div>
     <div class="row">
       <div class="col-lg-10">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">
-          {% for course in courses %}
-          <div class="col">
-            <a href="{% url 'professor:course' pk=course.course_id %}" class="d-block rounded-1">
-                <div class="card">
-                    <img src="{% static '/png/1.png' %}" class="card-img-top" alt="Course Image">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ course.title | truncatechars:15 }}</h5>
-                      <p class="card-text">{{ course.code }}-{{ course.codename }}</p>
-                      <p class="text-muted">{{ course.semester }} Semester {{ course.sy }}</p>
-                    </div>
-                  </div>
-            </a>
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">
+                {% if user.profile.is_student %}
+                  Enrolled Courses
+                {% elif user.profile.is_professor %}
+                  Block Courses
+                {% else %}
+                  Anonymous Courses
+                {% endif %}
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">
+                {% for course in courses %}
+                <div class="col">
+                  <a href="{% url 'professor:course' pk=course.course_id %}" class="course-block d-block rounded-1">
+                      <div class="card border">
+                          <img src="{% static '/png/1.png' %}" class="card-img-top" alt="Course Image">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ course.title | truncatechars:15 }}</h5>
+                            <p class="card-text">{{ course.code }}-{{ course.codename }}</p>
+                            <p class="text-muted">{{ course.semester }} Semester {{ course.sy }}</p>
+                          </div>
+                        </div>
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
           </div>
-        {% endfor %}
         </div>
       </div>
       <div class="col-lg-2">
-        <ul class="list-group">
-          <li class="list-group-item active" aria-current="true">An active item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-          <li class="list-group-item active" aria-current="true">An active item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-          <li class="list-group-item active" aria-current="true">An active item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-          <li class="list-group-item active" aria-current="true">An active item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-          <li class="list-group-item active" aria-current="true">An active item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-        </ul>
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h4 class="card-title">Todo</h4>
+            </div>
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
