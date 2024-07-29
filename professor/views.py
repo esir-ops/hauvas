@@ -200,7 +200,32 @@ class CourseModuleView(CourseView):
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("pk")
         self.object = self.get_object(pk=pk)
-        return render(request, self.template_name, self.get_context_data())
+
+        context = self.get_context_data()
+
+        modules = []
+
+        for module_list in self.object.modules.all():
+            module = {"title": module_list.title}
+            items = []
+
+            for module_item in module_list.items.all():
+                item = {
+                    "id": module_item.id,
+                    "title": module_item.title,
+                    "description": module_item.description,
+                    "content_url": module_item.content_url,
+                    "is_published": module_item.is_published,
+                }
+
+                items.append(item)
+
+            module["items"] = items
+            modules.append(module)
+
+        context["modules"] = modules
+
+        return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         pass
