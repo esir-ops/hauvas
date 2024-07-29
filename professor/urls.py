@@ -36,9 +36,4 @@ urlpatterns = [
         views.CourseAssignmentView.as_view(),
         name="course-assignments",
     ),
-    path(
-        "<int:pk>/course/about",
-        views.CourseAboutView.as_view(),
-        name="course-about",
-    ),
 ]
