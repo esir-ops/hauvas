@@ -58,3 +58,28 @@ class Course(models.Model):
 
     def __str__(self):
         return f"{self.professor.user.profile.first_name} | {self.code}:{self.codename} - {self.title}"
+
+
+class ModuleList(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="modules")
+    title = models.CharField(max_length=254, default="Week-")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.course.title} | Module List {self.title}"
+
+
+class ModuleItem(models.Model):
+    module_list = models.ForeignKey(
+        ModuleList, on_delete=models.CASCADE, related_name="items"
+    )
+    title = models.CharField(max_length=254, default="Lesson 01")
+    description = models.TextField()
+    content_url = models.CharField(max_length=255, default="none")
+    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.module_list.title} | Module {self.title}"
