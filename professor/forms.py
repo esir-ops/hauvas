@@ -50,31 +50,45 @@ class UpdateModuleListForm(forms.ModelForm):
 
 class UpdateModuleItemForm(forms.ModelForm):
 
-    title = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    description = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-control"})
-    )
-    content_url = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-control"})
-    )
-    is_published = forms.BooleanField(
-        widget=forms.CheckboxInput(attrs={"class": "form-check-input"})
-    )
-
     def __init__(self, *args, **kwargs):
-        course_pk = kwargs.pop("course_pk", "")
+        module_item = kwargs.pop("module_item", "")
 
         super(UpdateModuleItemForm, self).__init__(*args, **kwargs)
 
-        self.fields["module_list"] = forms.ModelChoiceField(
-            queryset=ModuleList.objects.filter(course_id=course_pk),
-            widget=forms.Select(attrs={"class": "form-control"}),
+        self.fields["title"] = forms.CharField(
+            widget=forms.TextInput(
+                attrs={"class": "form-control", "placeholder": module_item.title}
+            )
+        )
+        self.fields["short_description"] = forms.CharField(
+            widget=forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": module_item.short_description,
+                }
+            )
+        )
+        self.fields["description"] = forms.CharField(
+            widget=forms.Textarea(
+                attrs={"class": "form-control", "placeholder": module_item.description}
+            )
+        )
+        self.fields["content_url"] = forms.CharField(
+            widget=forms.TextInput(
+                attrs={"class": "form-control", "placeholder": module_item.content_url}
+            )
+        )
+        self.fields["is_published"] = forms.CharField(
+            widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            required=False,
+            initial=module_item.is_published,
         )
 
     class Meta:
         model = ModuleItem
         fields = [
             "title",
+            "short_description",
             "description",
             "content_url",
             "is_published",

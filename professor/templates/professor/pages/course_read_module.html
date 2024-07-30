@@ -33,10 +33,13 @@
                             <h3 class="card-title">
                                 <div class="hstack gap-3 d-flex justify-content-between">
                                     {{ module_item }}
-                                    <a href="{% url 'professor:course-update-about' pk=object.id %}" class="btn btn-secondary">Edit</a>
+                                    <a href="{% url 'professor:course-update-module' pk=object.id item_id=module_item.id %}" class="btn btn-secondary">Edit</a>
                                 </div>
                             </h3>
-                            <p class="card-text">{{ module_item.description }}</p>
+                            <p class="card-text">{{ module_item.short_description }}</p>
+
+                            <br />
+                            <p>{{ module_item.description }}</p>
                         </div>
                     </div>
                 </div>

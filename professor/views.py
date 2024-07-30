@@ -255,7 +255,7 @@ class CourseModuleUpdateView(CourseView):
         self.object = self.get_object(pk=course_pk)
 
         module_item = ModuleItem.objects.get(pk=module_item_pk)
-        form = UpdateModuleItemForm(course_pk=course_pk)
+        form = UpdateModuleItemForm(module_item=module_item)
 
         context = self.get_context_data()
 
@@ -265,7 +265,39 @@ class CourseModuleUpdateView(CourseView):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        pass
+        course_pk = kwargs.get("pk")
+        module_item_pk = kwargs.get("item_id")
+        self.object = self.get_object(pk=course_pk)
+
+        module_item = ModuleItem.objects.get(pk=module_item_pk)
+        form = UpdateModuleItemForm(module_item=module_item, data=request.POST)
+
+        context = self.get_context_data()
+
+        context["module_item"] = module_item
+        context["form"] = form
+
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            short_description = form.cleaned_data.get("short_description")
+            description = form.cleaned_data.get("description")
+            content_url = form.cleaned_data.get("content_url")
+            is_published = form.cleaned_data.get("is_published")
+
+            module_item.title = title
+            module_item.short_description = short_description
+            module_item.description = description
+            module_item.content_url = content_url
+            module_item.is_published = is_published
+
+            module_item.save()
+            context["form_success"] = True
+            messages.success(request, "Module updated!")
+        else:
+            messages.error(request, "An error occurred when updating the module!")
+            print("The form is not valid!")
+
+        return render(request, self.template_name, context)
 
 
 class CourseAssignmentView(CourseView):
