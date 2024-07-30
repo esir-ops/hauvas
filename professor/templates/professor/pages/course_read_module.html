@@ -1,0 +1,26 @@
+{% extends "base/base.html" %} 
+
+{% load static %} 
+
+{% block title %} {{ title }} {% endblock %} 
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+        {% comment %} Content Here {% endcomment %}
+        <div class="row">
+          <div class="col-xs-1-12">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title">{{ module_item }}</h3>
+                <p class="card-text">{{ module_item.description }}</p>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

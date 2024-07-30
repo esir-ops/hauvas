@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.util.get_courses import get_professor_courses
-from .models import Course
+from .models import Course, ModuleItem
 from .forms import UpdateCourseAboutForm, UpdateCourseSyllabusForm
 
 
@@ -206,7 +206,7 @@ class CourseModuleView(CourseView):
         modules = []
 
         for module_list in self.object.modules.all():
-            module = {"title": module_list.title}
+            module = {"title": module_list.title, "id": module_list.id}
             items = []
 
             for module_item in module_list.items.all():
@@ -224,6 +224,56 @@ class CourseModuleView(CourseView):
             modules.append(module)
 
         context["modules"] = modules
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class CourseModuleItemView(CourseView):
+    template_name = "professor/pages/course_read_module.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["sub_link"] = "module"
+        return context
+
+    def get(self, request, *args, **kwargs):
+        course_pk = kwargs.get("pk")
+        module_item_pk = kwargs.get("item_id")
+        self.object = self.get_object(pk=course_pk)
+
+        context = self.get_context_data()
+
+        module_item = ModuleItem.objects.get(pk=module_item_pk)
+
+        context["module_item"] = module_item
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class CourseModuleUpdateView(CourseView):
+    template_name = "professor/pages/course_update_module.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["sub_link"] = "module"
+        return context
+
+    def get(self, request, *args, **kwargs):
+        course_pk = kwargs.get("pk")
+        module_item_pk = kwargs.get("item_id")
+        self.object = self.get_object(pk=course_pk)
+
+        module_item = ModuleItem.objects.get(pk=module_item_pk)
+
+        context = self.get_context_data()
 
         return render(request, self.template_name, context)
 

@@ -32,6 +32,16 @@ urlpatterns = [
         name="course-modules",
     ),
     path(
+        "<int:pk>/course/modules/<int:item_id>/",
+        views.CourseModuleItemView.as_view(),
+        name="course-view-module",
+    ),
+    path(
+        "<int:pk>/course/modules/<int:item_id>/update/",
+        views.CourseModuleUpdateView.as_view(),
+        name="course-update-module",
+    ),
+    path(
         "<int:pk>/course/assignments/",
         views.CourseAssignmentView.as_view(),
         name="course-assignments",
