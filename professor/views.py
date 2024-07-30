@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from common.util.get_courses import get_professor_courses
 from .models import Course, ModuleItem
 from .forms import UpdateCourseAboutForm, UpdateCourseSyllabusForm
+from common.util.get_modules import get_modules
 
 
 page_link = "course"
@@ -203,25 +204,7 @@ class CourseModuleView(CourseView):
 
         context = self.get_context_data()
 
-        modules = []
-
-        for module_list in self.object.modules.all():
-            module = {"title": module_list.title, "id": module_list.id}
-            items = []
-
-            for module_item in module_list.items.all():
-                item = {
-                    "id": module_item.id,
-                    "title": module_item.title,
-                    "description": module_item.description,
-                    "content_url": module_item.content_url,
-                    "is_published": module_item.is_published,
-                }
-
-                items.append(item)
-
-            module["items"] = items
-            modules.append(module)
+        modules = get_modules(self.object.modules.all())
 
         context["modules"] = modules
 
