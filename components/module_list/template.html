@@ -33,7 +33,7 @@
                                         <a href="{% url 'professor:course-update-about' pk=object.id %}" class="d-block btn btn-light-primary">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                    <a href="{% url 'professor:course-update-about' pk=object.id %}" class="d-block btn btn-primary">
+                                    <a href="{% url 'professor:course-update-module' pk=object.id item_id=item.id %}" class="d-block btn btn-primary">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <button class="d-block btn btn-danger">

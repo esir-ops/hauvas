@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.util.get_courses import get_professor_courses
 from .models import Course, ModuleItem
-from .forms import UpdateCourseAboutForm, UpdateCourseSyllabusForm
+from .forms import UpdateCourseAboutForm, UpdateCourseSyllabusForm, UpdateModuleItemForm
 from common.util.get_modules import get_modules
 
 
@@ -255,8 +255,12 @@ class CourseModuleUpdateView(CourseView):
         self.object = self.get_object(pk=course_pk)
 
         module_item = ModuleItem.objects.get(pk=module_item_pk)
+        form = UpdateModuleItemForm(course_pk=course_pk)
 
         context = self.get_context_data()
+
+        context["module_item"] = module_item
+        context["form"] = form
 
         return render(request, self.template_name, context)
 
