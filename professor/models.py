@@ -75,7 +75,12 @@ class ModuleItem(models.Model):
         ModuleList, on_delete=models.CASCADE, related_name="items"
     )
     title = models.CharField(max_length=254, default="Lesson 01")
-    description = models.TextField()
+    short_description = models.CharField(
+        max_length=254, default="Learn the {your explanation about the course}!"
+    )
+    description = models.TextField(
+        default="Put your description here about the module, and even content"
+    )
     content_url = models.CharField(max_length=255, default="none")
     is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
