@@ -240,6 +240,27 @@ class CourseModuleItemView(CourseView):
         pass
 
 
+class CourseModuleCreateView(CourseView):
+    template_name = "professor/pages/course_create_module.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["sub_link"] = "module"
+        return context
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get("pk")
+        self.object = self.get_object(pk=pk)
+
+        context = self.get_context_data()
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
 class CourseModuleUpdateView(CourseView):
     template_name = "professor/pages/course_update_module.html"
 

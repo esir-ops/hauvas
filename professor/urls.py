@@ -37,6 +37,11 @@ urlpatterns = [
         name="course-view-module",
     ),
     path(
+        "<int:pk>/course/modules/create/",
+        views.CourseModuleCreateView.as_view(),
+        name="course-create-module",
+    ),
+    path(
         "<int:pk>/course/modules/<int:item_id>/update/",
         views.CourseModuleUpdateView.as_view(),
         name="course-update-module",
