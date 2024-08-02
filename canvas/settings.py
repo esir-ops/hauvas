@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "canvas",
     "main",
+    "dashboard",
     "professor",
     "announcement",
     "grade",
