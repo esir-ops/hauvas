@@ -1,5 +1,5 @@
 <a href="{% url 'professor:course' pk=object.id %}" class="list-group-item list-group-item-action {% if sub_link == "home" %} rounded-3 active {% else %} bg-transparent {% endif %}">Home</a>
-<a href="{% url 'professor:course-announcement' pk=object.id %}" class="list-group-item list-group-item-action {% if sub_link == "announcement" %} rounded-3 active {% else %} bg-transparent {% endif %}">Announcements</a>
 <a href="{% url 'professor:course-syllabus' pk=object.id %}" class="list-group-item list-group-item-action {% if sub_link == "syllabus" %} rounded-3 active {% else %} bg-transparent {% endif %}">Syllabus</a>
+<a href="{% url 'professor:course-announcement' pk=object.id %}" class="list-group-item list-group-item-action {% if sub_link == "announcement" %} rounded-3 active {% else %} bg-transparent {% endif %}">Announcements</a>
 <a href="{% url 'professor:course-modules' pk=object.id %}" class="list-group-item list-group-item-action {% if sub_link == "module" %} rounded-3 active {% else %} bg-transparent {% endif %}">Modules</a>
 <a href="{% url 'professor:course-assignments' pk=object.id %}" class="list-group-item list-group-item-action {% if sub_link == "assignment" %} rounded-3 active {% else %} bg-transparent {% endif %}">Assignments</a>
