@@ -26,15 +26,24 @@
         </div>
         <div class="col-lg-10">
         {% comment %} Content Here {% endcomment %}
-        <div class="row">
-          <div class="col-xs-1-12">
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">About</h3>
-              </div>
+            <div class="row">
+                <div class="col-xs-1-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <div class="hstack gap-3 d-flex justify-content-between">
+                                    {{ module_item }}
+                                    <a href="{% url 'professor:course-update-module' pk=object.id item_id=module_item.id %}" class="btn btn-secondary">Edit</a>
+                                </div>
+                            </h3>
+                            <p class="card-text">{{ module_item.short_description }}</p>
+
+                            <br />
+                            <p>{{ module_item.description }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
         </div>
     </div>
 </div>
