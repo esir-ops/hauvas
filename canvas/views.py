@@ -10,54 +10,45 @@ from common.util.get_courses import get_professor_courses
 
 
 # Create your views here.
-class HomePageView(View):
-    def get(self, request, *args, **kwargs):
-        return redirect("login")
-
-
 class LoginPageView(View):
+    template_name = "pages/login.html"
+
     def get(self, request, *args, **kwargs):
+
         if request.user.is_authenticated:
-            return redirect("dashboard")
+            return redirect("dashboard:dashboard")
+
         form = UserLoginForm()
-        return render(request, "pages/login.html", {"form": form})
+
+        return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):
+
         form = UserLoginForm(data=request.POST)
+
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("dashboard")
+            return redirect("dashboard:dashboard")
         else:
             messages.error(request, "Invalid username or password.")
-            return render(request, "pages/login.html", {"form": form})
+            return render(request, self.template_name, {"form": form})
 
 
 class LogoutPageView(View):
     def get(self, request, *args, **kwargs):
+
         logout(request)
         return redirect("login")
 
 
-class DashboardPageView(View):
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            if request.user.profile.is_student:
-                return redirect("student:dashboard")
-            elif request.user.profile.is_professor:
-                return redirect("professor:dashboard")
-            else:
-                return redirect("login")
-        else:
-            return redirect("login")
-
-
 class ProfilePageView(LoginRequiredMixin, View):
+    template_name = "pages/profile.html"
+
     def get(self, request, *args, **kwargs):
         form = ProfileForm()
 
         user = self.request.user
 
-        # TODO: Add get_student_courses for student viewing profile page
         courses = get_professor_courses(user)
 
         context = {
@@ -75,6 +66,8 @@ class ProfilePageView(LoginRequiredMixin, View):
 
 
 class SecurityPageView(LoginRequiredMixin, View):
+    template_name = "pages/security.html"
+
     def get(self, request, *args, **kwargs):
         form = ChangePasswordForm(self.request.user)
 
@@ -90,18 +83,13 @@ class SecurityPageView(LoginRequiredMixin, View):
             "form": form,
         }
 
-        return render(
-            request,
-            "pages/security.html",
-            context,
-        )
+        return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         form = ChangePasswordForm(self.request.user, data=request.POST)
 
         user = self.request.user
 
-        # TODO: Add get_student_courses for student viewing profile page
         courses = get_professor_courses(user)
 
         context = {
@@ -115,15 +103,7 @@ class SecurityPageView(LoginRequiredMixin, View):
             form.save()
             update_session_auth_hash(request, form.user)
             messages.success(request, "Password changed successfully.")
-            return render(
-                request,
-                "pages/security.html",
-                context,
-            )
+            return render(request, self.template_name, context)
         else:
             messages.error(request, "An error occurred when changing password.")
-            return render(
-                request,
-                "pages/security.html",
-                context,
-            )
+            return render(request, self.template_name, context)
