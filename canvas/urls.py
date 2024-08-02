@@ -34,7 +34,6 @@ urlpatterns = [
     path("profile/", views.ProfilePageView.as_view(), name="profile"),
     path("security/", views.SecurityPageView.as_view(), name="security"),
     path("api-auth/", include("rest_framework.urls"), name="rest_framework"),
-    path("professor/", include("professor.urls")),
     path("announcements/", include("announcement.urls")),
     path("grades/", include("grade.urls")),
     path("inbox/", include("inbox.urls")),
