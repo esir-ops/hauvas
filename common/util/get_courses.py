@@ -1,6 +1,26 @@
 from django.contrib.auth.models import User
 
 
+def get_courses(user: User):
+    courses = None
+
+    if user.profile.is_student:
+        courses = get_student_courses(user)
+
+    elif user.profile.is_professor:
+        courses = get_professor_courses(user)
+
+    return courses
+
+
+def get_student_courses(user: User):
+    student = user.student
+
+    courses = []
+
+    return courses
+
+
 def get_professor_courses(user: User):
     professor = user.professor
 
@@ -8,7 +28,7 @@ def get_professor_courses(user: User):
 
     for course in professor.courses.all():
         course_content = {
-            "course_id": course.id,
+            "id": course.id,
             "title": course.title,
             "code": course.code,
             "codename": course.codename,
