@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout
-from django.views import View
+from django.views.generic import TemplateView
 from .forms import UserLoginForm
 from main.forms import ProfileForm, ChangePasswordForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from common.util.get_courses import get_professor_courses
+from dashboard.views.views import View
 
 
 # Create your views here.
-class LoginPageView(View):
+class LoginPageView(TemplateView):
     template_name = "pages/login.html"
 
     def get(self, request, *args, **kwargs):
@@ -34,70 +35,54 @@ class LoginPageView(View):
             return render(request, self.template_name, {"form": form})
 
 
-class LogoutPageView(View):
+class LogoutPageView(TemplateView):
     def get(self, request, *args, **kwargs):
 
         logout(request)
         return redirect("login")
 
 
-class ProfilePageView(LoginRequiredMixin, View):
+class ProfilePageView(View, TemplateView):
     template_name = "pages/profile.html"
 
     def get(self, request, *args, **kwargs):
         form = ProfileForm()
 
-        user = self.request.user
+        context = self.get_context_data(*args, **kwargs)
 
-        courses = get_professor_courses(user)
+        context["title"] = "Profile"
+        context["link"] = "profile"
+        context["form"] = form
 
-        context = {
-            "title": "Profile",
-            "link": "profile",
-            "courses": courses,
-            "form": form,
-        }
-
-        return render(request, "pages/profile.html", context)
+        return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         # TODO: Update profile data
         return redirect("profile")
 
 
-class SecurityPageView(LoginRequiredMixin, View):
+class SecurityPageView(View, TemplateView):
     template_name = "pages/security.html"
 
     def get(self, request, *args, **kwargs):
         form = ChangePasswordForm(self.request.user)
 
-        user = self.request.user
+        context = self.get_context_data(*args, **kwargs)
 
-        # TODO: Add get_student_courses for student viewing profile page
-        courses = get_professor_courses(user)
-
-        context = {
-            "title": "Security",
-            "link": "security",
-            "courses": courses,
-            "form": form,
-        }
+        context["title"] = "Security"
+        context["link"] = "security"
+        context["form"] = form
 
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         form = ChangePasswordForm(self.request.user, data=request.POST)
 
-        user = self.request.user
+        context = self.get_context_data(*args, **kwargs)
 
-        courses = get_professor_courses(user)
-
-        context = {
-            "title": "Security",
-            "link": "security",
-            "courses": courses,
-            "form": form,
-        }
+        context["title"] = "Security"
+        context["link"] = "security"
+        context["form"] = form
 
         if form.is_valid():
             form.save()
