@@ -18,6 +18,21 @@ def get_student_courses(user: User):
 
     courses = []
 
+    for enrollment in student.enrollments.all():
+        course = enrollment.course
+
+        course_content = {
+            "enrollment_id": enrollment.id,
+            "id": course.id,
+            "title": course.title,
+            "code": course.code,
+            "codename": course.codename,
+            "department": course.department.abbr,
+            "semester": course.semester.__str__(),
+        }
+
+        courses.append(course_content)
+
     return courses
 
 
