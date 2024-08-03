@@ -30,33 +30,23 @@
         </div>
         <div class="col-lg-10">
         {% comment %} Content Here {% endcomment %}
-            <div class="row">
-                <div class="col-xs-1-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                <div class="hstack gap-3 d-flex justify-content-between">
-                                    {{ course.title }} | {{ course.codename }} Course
-                                    <a href="#" class="btn btn-success">Edit</a>
-                                </div>
-                            </h3>
-                            <p class="card-text">{{ course.semester.term }} Semester {{ course.semester.start_year }}-{{ course.semester.end_year }}</p>
-
-                            <br />
-                            <h3 class="text-bg-primary px-2 py-1 rounded-1">About your Professor</h3>
-                            <br />
-
-                            <h3 class="text-bg-primary px-2 py-1 rounded-1">About this Course</h3>
-                            <p class="text-justify lh-base">
-                                {% autoescape off %}
-                                    {{ course.about }}
-                                {% endautoescape %}
-                            </p>
-
-                        </div>
+        <div class="row">
+          <div class="col-xs-1-12">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title">
+                    <div class="hstack gap-3 d-flex justify-content-between">
+                        {{ course.title }} Syllabus
+                        <a href="#" class="btn btn-success">Edit</a>
                     </div>
-                </div>
+                </h3>
+
+                <br />
+                <p class="text-justify lh-base">{{ course.syllabus }}</p>
+              </div>
             </div>
+          </div>
+        </div>
         </div>
     </div>
 </div>
