@@ -36,12 +36,20 @@
                         <div class="card-body">
                             <h3 class="card-title">
                                 <div class="hstack gap-3 d-flex justify-content-between">
-                                    {{ course.title }} Modules
+                                    {{ course.title }}  Modules
+                                    {% if user.profile.is_professor %}
+                                        <a href="#" class="btn btn-success">
+                                            <i class="fa fa-plus"></i> Add new module/s
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </h3>
 
                             <br />
 
+                            <div class="d-flex flex-column gap-3">
+                                {% component "module_list" %}{% endcomponent %}
+                            </div>
                         </div>
                     </div>
                 </div>

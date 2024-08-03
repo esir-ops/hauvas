@@ -2,6 +2,7 @@ from dashboard.views.views import View
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from dashboard.models import Course
+from common.util.get_modules import get_modules
 
 
 class Module(View, TemplateView):
@@ -14,11 +15,14 @@ class Module(View, TemplateView):
 
         course = Course.objects.get(pk=course_id)
 
+        modules = get_modules(course.modules.all())
+
         context["title"] = f"{course.title} Modules"
         context["link"] = "course"
         context["sub_link"] = "module"
 
         context["course"] = course
+        context["modules"] = modules
 
         return context
 
