@@ -9,12 +9,18 @@ class View(LoginRequiredMixin):
         context = super().get_context_data(*args, **kwargs)
 
         user = self.request.user
+        session = self.request.session
+        session_course_key = f"{user.id}-courses"
 
-        # TODO: Add logic for processing courses both professor and student
-        # TODO: Add logic to cache and store the courses generated to request.session
-        courses = get_courses(user)
+        if session_course_key in session:
+            context["courses"] = session.get(session_course_key)
+        else:
+            courses = get_courses(user)
 
-        context["courses"] = courses
+            session[session_course_key] = courses
+
+            context["courses"] = courses
+
         return context
 
 
