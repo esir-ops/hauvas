@@ -37,7 +37,9 @@
                 <h3 class="card-title">
                     <div class="hstack gap-3 d-flex justify-content-between">
                         {{ course.title }} Syllabus
-                        <a href="#" class="btn btn-success">Edit</a>
+                        {% if user.profile.is_professor %}
+                            <a href="#" class="btn btn-success">Edit</a>
+                        {% endif %}
                     </div>
                 </h3>
 
