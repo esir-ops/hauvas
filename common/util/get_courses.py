@@ -1,3 +1,4 @@
+from datetime import time
 from django.contrib.auth.models import User
 
 
@@ -28,6 +29,10 @@ def get_student_courses(user: User):
             "code": course.code,
             "codename": course.codename,
             "department": course.department.abbr,
+            "block": course.block.name,
+            "time": f"{course.start_time}-{course.end_time}",
+            "days": course.days,
+            "room": course.room,
             "semester": course.semester.__str__(),
         }
 
@@ -48,6 +53,10 @@ def get_professor_courses(user: User):
             "code": course.code,
             "codename": course.codename,
             "department": course.department.abbr,
+            "block": course.block.name,
+            "time": f"{course.start_time}-{course.end_time}",
+            "days": course.days,
+            "room": course.room,
             "semester": course.semester.__str__(),
         }
         courses.append(course_content)

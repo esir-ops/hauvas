@@ -65,6 +65,19 @@ class Professor(models.Model):
 
 
 class Course(models.Model):
+    DAYS_CHOICES = [
+        ("MTH", "Monday and Thursday"),
+        ("TF", "Tuesday and Friday"),
+        ("WS", "Wednesday and Saturday"),
+        ("M", "Monday"),
+        ("T", "Tuesday"),
+        ("W", "Wednesday"),
+        ("TH", "Thursday"),
+        ("F", "Friday"),
+        ("S", "Saturday"),
+        ("D", "Default"),
+    ]
+
     professor = models.ForeignKey(
         Professor, on_delete=models.CASCADE, related_name="courses"
     )
@@ -85,6 +98,10 @@ class Course(models.Model):
     about = models.TextField(default="This is about course, populate it later")
     syllabus = models.TextField(default="This is syllabus course, populate it later")
     unit = models.IntegerField()
+    start_time = models.TimeField(blank=True)
+    end_time = models.TimeField(blank=True)
+    days = models.CharField(max_length=20, choices=DAYS_CHOICES, default="D")
+    room = models.CharField(max_length=20, default="undecided")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
