@@ -14,6 +14,7 @@ class Home(View, TemplateView):
 
         course = Course.objects.get(pk=course_id)
 
+        context["title"] = f"{course.title} Course"
         context["link"] = "course"
         context["sub_link"] = "home"
 
