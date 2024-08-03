@@ -3,7 +3,7 @@ from .views.announcement import Announcement
 from .views.assignment import Assignment
 from .views.views import Dashboard
 from .views.home import Home
-from .views.module import Module
+from .views.module import Module, ModuleDetail
 from .views.syllabus import Syllabus
 
 
@@ -21,6 +21,11 @@ urlpatterns = [
         name="course-announcement",
     ),
     path("course/<int:course_id>/modules/", Module.as_view(), name="course-module"),
+    path(
+        "course/<int:course_id>/modules/<int:module_id>/",
+        ModuleDetail.as_view(),
+        name="course-module-detail",
+    ),
     path(
         "course/<int:course_id>/assignments/",
         Assignment.as_view(),
