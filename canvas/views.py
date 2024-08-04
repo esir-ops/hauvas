@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic import TemplateView
 from .forms import UserLoginForm
 from main.forms import ProfileForm, ChangePasswordForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from common.util.get_courses import get_professor_courses
 from dashboard.views.views import View
 
 
@@ -20,19 +18,39 @@ class LoginPageView(TemplateView):
             return redirect("dashboard:dashboard")
 
         form = UserLoginForm()
+        context = {"form": form, "next": request.GET.get("next", None)}
 
-        return render(request, self.template_name, {"form": form})
+        return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
 
         form = UserLoginForm(data=request.POST)
+        context = {"form": form, "next": request.GET.get("next")}
 
-        if form.is_valid():
-            login(request, form.get_user())
-            return redirect("dashboard:dashboard")
-        else:
+        if not form.is_valid():
             messages.error(request, "Invalid username or password.")
-            return render(request, self.template_name, {"form": form})
+            return render(request, self.template_name, context)
+
+        username = form.cleaned_data["username"]
+        password = form.cleaned_data["password"]
+        remember_me = form.cleaned_data["remember_me"]
+
+        user = authenticate(username=username, password=password)
+
+        if not user:
+            messages.error(request, "Not a user")
+            return render(request, self.template_name, context)
+
+        login(request, user)
+
+        # set session to expire when browser close
+        if not remember_me:
+            request.session.set_expiry(0)
+
+        if context["next"]:
+            return redirect(context["next"])
+
+        return redirect("dashboard:dashboard")
 
 
 class LogoutPageView(TemplateView):
