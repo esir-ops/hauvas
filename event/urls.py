@@ -3,4 +3,4 @@ from . import views
 
 app_name = "event"
 
-urlpatterns = [path("", views.EventDashboardView.as_view(), name="event")]
+urlpatterns = [path("", views.EventList.as_view(), name="event")]
