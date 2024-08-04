@@ -123,6 +123,12 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # Session
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
+# Save session on every request (to keep persistency)
+SESSION_SAVE_EVERY_REQUEST = True
+
+# Session Default Age (Default = 7 Days)
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
+
 # Use secure cookies if you are on HTTPS
 SESSION_COOKIE_SECURE = True
 
@@ -135,10 +141,6 @@ SESSION_COOKIE_SAMESITE = "Lax"  # or 'Strict', 'None' depending on your require
 # Login / Logout URL (Using URL Namespace Path login=hostname/login/)
 LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "login"
-
-# Logout User when browser close
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_SAVE_EVERY_REQUEST = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
