@@ -136,6 +136,10 @@ SESSION_COOKIE_SAMESITE = "Lax"  # or 'Strict', 'None' depending on your require
 LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "login"
 
+# Logout User when browser close
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
