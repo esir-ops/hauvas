@@ -43,8 +43,10 @@ class LoginPageView(TemplateView):
 
         login(request, user)
 
-        # set session to expire when browser close
-        if not remember_me:
+        # set session to expire when browser close (1 Month)
+        if remember_me:
+            request.session.set_expiry(60 * 60 * 24 * 30)
+        else:
             request.session.set_expiry(0)
 
         if context["next"]:
