@@ -39,7 +39,7 @@
                                     {{ course.title }} | {{ course.codename }} Course
                                     
                                     {% if user.profile.is_professor %}
-                                        <a href="#" class="btn btn-success">Edit</a>
+                                        <a href="{% url 'dashboard:course-home-update' course_id=course.id %}" class="btn btn-success">Edit</a>
                                     {% endif %}
                                 </div>
                             </h3>
