@@ -2,6 +2,7 @@ from common.util.views import View
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from dashboard.models import Course
+from dashboard.forms.home.update import HomeUpdateForm
 
 
 class Home(View, TemplateView):
@@ -50,6 +51,8 @@ class HomeUpdate(View, TemplateView):
     def get(self, request, *args, **kwargs):
 
         context = self.get_context_data(*args, **kwargs)
+
+        context["form"] = HomeUpdateForm()
 
         return render(request, self.template_name, context)
 

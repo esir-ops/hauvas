@@ -27,7 +27,7 @@
 
                             <form method="POST" action="{% url 'dashboard:course-home-update' course_id=course.id %}">
                                 {% csrf_token %}
-                                {{ form.about }}
+                                {{ form.content }}
                                 <div id="editor"></div>
                                 <br />
                                 <button class="btn btn-primary" type="submit">Save Changes</button>

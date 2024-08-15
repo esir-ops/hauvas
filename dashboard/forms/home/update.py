@@ -1,5 +1,5 @@
-from django.forms import forms
+from django import forms
 
 
 class HomeUpdateForm(forms.Form):
-    pass
+    content = forms.CharField(widget=forms.Textarea())
