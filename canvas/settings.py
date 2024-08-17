@@ -127,6 +127,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_SAVE_EVERY_REQUEST = True
 
 # Session Default Age (Default = 7 Days)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 # Use secure cookies if you are on HTTPS
