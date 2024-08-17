@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from dashboard.util.view import DashboardParentView
+
 from dashboard.forms.home.update import HomeUpdateForm
 
 
