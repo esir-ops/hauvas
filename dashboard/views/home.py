@@ -1,25 +1,38 @@
-from common.util.views import View
+from django.http import Http404
 from django.views.generic import TemplateView
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
 from dashboard.models import Course
 from dashboard.forms.home.update import HomeUpdateForm
+from common.util.views import View
 
 
-class Home(View, TemplateView):
-    template_name = "dashboard/home/detail.html"
-
+class HomeParent(View, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
         course_id = kwargs.pop("course_id", None)
 
-        course = Course.objects.get(pk=course_id)
+        if not course_id:
+            raise Http404("Course Not found!")
 
-        context["title"] = f"{course.title} Course"
+        course = get_object_or_404(Course, pk=course_id)
+
+        context["title"] = f"{course.title}"
         context["link"] = "course"
-        context["sub_link"] = "home"
-
         context["course"] = course
+
+        return context
+
+
+class Home(HomeParent):
+    template_name = "dashboard/home/detail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context["title"] = f"{context['title']} Home"
+        context["sub_link"] = "home"
 
         return context
 
@@ -30,21 +43,14 @@ class Home(View, TemplateView):
         return render(request, self.template_name, context)
 
 
-class HomeUpdate(View, TemplateView):
+class HomeUpdate(HomeParent):
     template_name = "dashboard/home/update.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        course_id = kwargs.pop("course_id", None)
-
-        course = Course.objects.get(pk=course_id)
-
-        context["title"] = f"{course.title} Course"
-        context["link"] = "course"
+        context["title"] = f"Update {context['title']} About"
         context["sub_link"] = "home"
-
-        context["course"] = course
 
         return context
 
