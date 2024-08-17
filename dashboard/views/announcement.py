@@ -10,15 +10,8 @@ class Announcement(View, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        course_id = kwargs.pop("course_id", None)
-
-        course = Course.objects.get(pk=course_id)
-
-        context["title"] = f"{course.title} Announcement"
-        context["link"] = "course"
+        context["title"] = f"{context['title']} Announcements"
         context["sub_link"] = "announcement"
-
-        context["course"] = course
 
         return context
 
