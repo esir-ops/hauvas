@@ -3,8 +3,9 @@ from .views.announcement import Announcement
 from .views.assignment import Assignment
 from .views.views import Dashboard
 from .views.home import Home, HomeUpdate
-from .views.module import Module, ModuleDetail
 from .views.syllabus import Syllabus
+from .views.people import People
+from .views.module import Module, ModuleDetail
 
 
 app_name = "dashboard"
@@ -22,6 +23,10 @@ syllabusurls = [
     path(
         "course/<int:course_id>/syllabus/", Syllabus.as_view(), name="course-syllabus"
     ),
+]
+
+peopleurls = [
+    path("course/<int:course_id>/people/", People.as_view(), name="course-people")
 ]
 
 announcementurls = [
@@ -59,6 +64,9 @@ urlpatterns += homeurls
 
 # adding syllabus to urlpattern
 urlpatterns += syllabusurls
+
+# adding people to urlpattern
+urlpatterns += peopleurls
 
 # adding announcement to urlpattern
 urlpatterns += announcementurls
