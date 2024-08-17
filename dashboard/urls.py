@@ -4,7 +4,7 @@ from .views.assignment import Assignment
 from .views.views import Dashboard
 from .views.home import Home, HomeUpdate
 from .views.syllabus import Syllabus
-from .views.people import People
+from .views.people import PeopleList
 from .views.module import Module, ModuleDetail
 
 
@@ -26,7 +26,7 @@ syllabusurls = [
 ]
 
 peopleurls = [
-    path("course/<int:course_id>/people/", People.as_view(), name="course-people")
+    path("course/<int:course_id>/people/", PeopleList.as_view(), name="course-people")
 ]
 
 announcementurls = [
