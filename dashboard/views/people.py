@@ -1,10 +1,9 @@
-from common.util.views import View
-from django.views.generic import TemplateView
 from django.shortcuts import render
-from dashboard.models import Course
+
+from dashboard.util.view import DashboardParentView
 
 
-class People(View, TemplateView):
+class People(DashboardParentView):
     template_name = "dashboard/people/list.html"
 
     def get_context_data(self, *args, **kwargs):
