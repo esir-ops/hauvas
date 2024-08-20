@@ -26,6 +26,14 @@ class Home(DashboardParentView):
 class HomeUpdate(DashboardParentView):
     template_name = "dashboard/home/update.html"
 
+    permission_denied_message = "You're not allowed to view and edit this course about!"
+
+    def __init__(self):
+        permissions = ["dashboard.change_about"]
+        self.permission_required = self.override_permissions_required(
+            permissions=permissions
+        )
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 

@@ -19,3 +19,17 @@ class Syllabus(DashboardParentView):
         context = self.get_context_data(*args, **kwargs)
 
         return render(request, self.template_name, context)
+
+
+class SyllabusUpdate(DashboardParentView):
+    template_name = "dashboard/syllabus/update.html"
+
+    permission_denied_message = (
+        "You're not allowed to view and edit this course syllabus!"
+    )
+
+    def __init__(self):
+        permissions = ["dashboard.change_syllabus"]
+        self.permission_required = self.override_permissions_required(
+            permissions=permissions
+        )

@@ -30,3 +30,11 @@ class DashboardParentView(PermissionRequiredMixin, View, TemplateView):
         context["course"] = course
 
         return context
+
+    # ===========================================================================
+    # Custom Functions
+    # ===========================================================================
+
+    # function to add permission on the inherit class without modifying the base class
+    def override_permissions_required(self, permissions=[]):
+        return self.get_permission_required() + permissions

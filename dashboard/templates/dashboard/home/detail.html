@@ -38,7 +38,7 @@
                                 <div class="hstack gap-3 d-flex justify-content-between">
                                     {{ course.title }} | {{ course.codename }} Course
                                     
-                                    {% if user.profile.is_professor %}
+                                    {% if perms.dashboard.change_about %}
                                         <a href="{% url 'dashboard:course-home-update' course_id=course.id %}" class="btn btn-success">Edit</a>
                                     {% endif %}
                                 </div>
