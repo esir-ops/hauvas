@@ -122,15 +122,21 @@ class SecurityPageView(View, TemplateView):
 
 
 def custom_400_view(request, exception):
-    return render(request, "400.html", status=400)
+    context = {"exception": exception}
+
+    return render(request, "400.html", context, status=400)
 
 
 def custom_403_view(request, exception):
-    return render(request, "403.html", status=403)
+    context = {"exception": exception}
+
+    return render(request, "403.html", context, status=403)
 
 
 def custom_404_view(request, exception):
-    return render(request, "404.html", status=404)
+    context = {"exception": exception}
+
+    return render(request, "404.html", context, status=404)
 
 
 def custom_500_view(request):
