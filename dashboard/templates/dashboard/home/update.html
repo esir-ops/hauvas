@@ -2,7 +2,7 @@
 
 {% load static %} 
 
-{% block title %} {{ title }} {% endblock %} 
+{% block title %} {{ title }} {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -42,19 +42,35 @@
 {% endblock content %}
 
 {% block extra_js %}
-<script>
-    let about_textarea = $("#id_about");
+<script src="{% static './js/QuillDeltaToHtmlConverter.bundle.js' %}"></script>
 
-    let quill = new Quill('#editor', {
+<script>
+    let content_textarea = $("#id_content");
+
+    const quill = new Quill('#editor', {
         theme: 'snow'
     });
 
-    console.log(quill)
+    function debounce(func, delay) {
+        let timeoutId;
+
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    function quill_on_text_change(delta, oldDelta, source) {
+        console.log("Text changed!", delta, oldDelta, source);
+    }
+
+    const debouncedTextChange = debounce(quill_on_text_change, 1750);
 
     quill.on('text-change', (delta, oldDelta, source) => {
-        console.log(quill.getContents())
+        debouncedTextChange(delta, oldDelta, source);
     });
 
-    about_textarea.val(about_textarea.attr("value"));
 </script>
 {% endblock extra_js %}

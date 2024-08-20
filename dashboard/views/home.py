@@ -46,4 +46,11 @@ class HomeUpdate(DashboardParentView):
 
         context = self.get_context_data(*args, **kwargs)
 
+        form = HomeUpdateForm(data=request.POST)
+
+        if form.is_valid():
+            print(form.cleaned_data["content"])
+        else:
+            print("Not valid!")
+
         return render(request, self.template_name, context)
