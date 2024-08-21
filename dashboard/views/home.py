@@ -57,6 +57,7 @@ class HomeUpdate(DashboardParentView):
         form = HomeUpdateForm(data=request.POST)
 
         if form.is_valid():
+            print("The content is")
             print(form.cleaned_data["content"])
         else:
             print("Not valid!")
