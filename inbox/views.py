@@ -1,5 +1,7 @@
+from django.utils.datastructures import MultiValueDictKeyError
+
 from common.util.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView
 
 
@@ -18,5 +20,10 @@ class InboxList(View, TemplateView):
     def get(self, request, *args, **kwargs):
 
         context = self.get_context_data(*args, **kwargs)
+
+        try:
+            email_type = request.GET["type"]
+        except MultiValueDictKeyError:
+            return redirect(reverse('inbox:inbox') + '?type=all')
 
         return render(request, self.template_name, context)
