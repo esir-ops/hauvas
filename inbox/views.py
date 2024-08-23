@@ -90,3 +90,21 @@ class InboxList(View, TemplateView):
         context["inboxes"] = inbox_list
 
         return render(request, self.template_name, context)
+
+
+class InboxCompose(View, TemplateView):
+    template_name = "inbox/list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context["title"] = "Compose"
+        context["link"] = "inbox"
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+
+        context = self.get_context_data(*args, **kwargs)
+
+        return render(request, self.template_name, context)

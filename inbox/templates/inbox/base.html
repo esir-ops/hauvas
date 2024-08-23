@@ -67,13 +67,14 @@
                             <div class="email-app-menu">
                                 <div class="form-group form-group-compose">
                                 <!-- compose button  -->
-                                <button
+                                <a
                                     type="button"
+                                    href="{% url 'inbox:inbox-compose' %}"
                                     class="btn btn-primary btn-block my-4 compose-btn"
                                 >
                                     <i class="bi bi-plus"></i>
                                     Compose
-                                </button>
+                                </a>
                                 </div>
                                 <div class="sidebar-menu-list ps">
                                 <!-- sidebar menu  -->
